@@ -2,42 +2,22 @@ from functools import reduce as rd #Importar la funcion "reduce" desde la librer
 
 def ordenes(rutinaContable):
     
-    
-    
-    #Para el desarrollo de esta implementación, el programador debe permitir introducir un
-    #registro de ordenes desde una lista de tuplas y a través de la función “map”, “reduce” y “lambda”
-   
 
-
-    #Suma el incremento si la compra no llega a un mínima de 600.000 pesos
-    
-
-    #Lambda, Sumar el total de cada tupla de cada lista
-    #Recorrido x, obtener numero de cada orden
-    #Recorrido y, multiplica cantidad * precio
     factura = list(map(lambda x: [x[0]] + list(map(lambda y: y[1]*y[2], x[1:])), rutinaContable))
     
-
-
-    #Lambda, Sumar los totales obtenidos de cada lista
-    #Recorrido x, obtener numero de cada orden
-    #Recorrido a, b , usa la funcion reduce para obtener un valor por lista, pero primero se suman los valores previos
-    #y se procede con el redondeo a 2 decimales
     factura = list(map(lambda x: [x[0]] + [rd(lambda a,b: round(a + b,2), x[1:])], factura))
      
-    #Lambda, verificar aumento de 25.000 pesos
-    #Si el valor de la orden de cada lista es menor a ordenBase(600000), suma 25.000 pesos al total.
+
     ordenBase = 600000
 
     factura = list(map(lambda x: x if x[1] >= ordenBase else (x[0], x[1] + 25000), factura))
     
     print('------------------------ Inicio Registro diario ---------------------------------')
-    #Ciclo para imprimir el total de cada compra
+   
     for x in range(len(factura)):
         print(f'La factura {factura[x][0]} tiene un total en pesos de {factura[x][1]:,.2f}')
     print('-------------------------- Fin Registro diario ----------------------------------')
 
-#Registro diario
 
 rutinaContable = [ [1201, ("5464", 4, 25842.99), ("7854",18,23254.99), ("8521", 9, 48951.95)], 
                    [1202, ("8756", 3, 115362.58),("1112",18,2354.99)],
